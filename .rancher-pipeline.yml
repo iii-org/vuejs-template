@@ -1,0 +1,19 @@
+stages:
+- name: Build--NPM build dist
+  steps:
+  - runScriptConfig:
+      image: node
+      shellScript: cd app; npm install; npm run build; ls
+- name: Publish--vuejs image
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: ${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
+- name: deploy--vuejs deployment and service on kubernetes
+  steps:
+  - applyYamlConfig:
+      path: ./k8s-yaml/vuejs-deployment.yaml
+  - applyYamlConfig:
+      path: ./k8s-yaml/vuejs-service.yaml
+
