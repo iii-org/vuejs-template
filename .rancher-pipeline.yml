@@ -2,7 +2,7 @@ stages:
 - name: Build--NPM build dist
   steps:
   - runScriptConfig:
-      image: node
+      image: node:14
       shellScript: cd app; npm install; npm run build; ls
 - name: Publish--vuejs image
   steps:
