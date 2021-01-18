@@ -9,7 +9,7 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: ${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}-${CICD_EXECUTION_SEQUENCE}
+      tag: ${CICD_GIT_REPO_NAME}:${CICD_GIT_BRANCH}
 - name: deploy--vuejs deployment and service on kubernetes
   steps:
   - applyYamlConfig:
